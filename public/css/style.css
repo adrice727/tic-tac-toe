@@ -1,0 +1,48 @@
+.player-container div:first-child::after {
+  content: '\f00d';
+  font-family: FontAwesome;
+  color: blue;
+  font-size: 24px;
+  margin-left: 5px;
+}
+
+.player-container div:nth-child(2)::after {
+  content: '\f10c';
+  font-family: FontAwesome;
+  color: red;
+  font-size: 24px;
+  margin-left: 5px;
+}
+
+.player {
+  display: table;
+  height: 50%;
+}
+
+.player span {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.board {
+  margin: 0 auto;
+  height: 450px;
+  width: 450px;
+}
+
+.cell {
+  float: left;
+  width: 150px;
+  height: 150px;
+  box-sizing: border-box;
+}
+
+.board div:nth-child(3n+2) {
+  border-right: 3px solid #777777;
+  border-left: 3px solid #777777;
+}
+
+.board div:nth-child(n+4):nth-child(-n+6) {
+  border-top: 3px solid #777777;
+  border-bottom: 3px solid #777777;
+}
