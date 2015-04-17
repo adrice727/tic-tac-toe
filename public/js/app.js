@@ -6,9 +6,7 @@ $(function(){
 
   // Event Handlers
   $('.cell.open').on('click', function(){
-    // var cell = $(this).data('id');
     var cell = $(this).attr('id');
-    console.log(cell);
     if (!pause) { move(cell); }
   })
 
@@ -62,7 +60,6 @@ $(function(){
   }
 
   function updateDisplay (status) {
-    console.log(status);
     if ( status.winner ) {
       var winningCells = status.winner.cells.split('');
       winningCells.forEach(function(cell){

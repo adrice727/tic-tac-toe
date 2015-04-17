@@ -1,6 +1,3 @@
-var app = require('../server');
-// var bodyParser = require('body-parser');
-
 var cells = {};
 
 exports.move = function(req, res) {
