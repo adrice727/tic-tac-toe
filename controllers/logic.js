@@ -1,5 +1,6 @@
-var cells = {};
+var cells = {};  // Maintains state of board
 
+/* Request handlers */
 exports.move = function(req, res) {
   var player = req.body.player;
   var cell = req.body.cell;
@@ -19,6 +20,7 @@ exports.reset = function(req, res) {
   res.send({reset: true});
 }
 
+/* Helper functions */
 function validMove(player, cell) {
   if ( !cells[cell] ) {
     cells[cell] = player;

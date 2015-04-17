@@ -2,13 +2,13 @@ $(function(){
 
   var logic = new LogicService();
   var gameStatus = 1; // O: game over; 1: player1; 2: player2
-  var pause = false;
+  var waiting = false; // Prevent duplicate API calls
 
-  // Event Handlers
+  /* Event Handlers */
   $('.cell.open').on('click', function(){
     var cell = $(this).attr('id');
-    if (!pause) { move(cell); }
-  })
+    if (!waiting) { move(cell); }
+  });
 
   $('.cell.open').hover(
     function(){
@@ -20,25 +20,25 @@ $(function(){
       var cell = $(this);
       cell.removeClass('cell-hover-x cell-hover-o');
     }
-  )
+  );
 
   $('.new-game').on('click', function(){
     logic.reset().then(function(reset){
-      if ( reset ) { updateStatus({reset: reset}); }
+      if ( reset ) { updateGameStatus({reset: reset}); }
     });
-  })
+  });
 
-  // Helper functions
+  /* Helper functions */
   function move(cell) {
-    pause = !pause;
+    waiting = true;
     logic.move(gameStatus, cell).then(function(data) {
       if ( data.valid ) { 
         addMarker(cell);
-        updateStatus(data);
-        pause = !pause;
+        updateGameStatus(data);
       }
+      waiting = false;
     });
-  };
+  }
 
   function addMarker(cell) {
     var classes = {1: 'cell-x', 2: 'cell-o'};
@@ -47,11 +47,10 @@ $(function(){
     e.addClass(classes[gameStatus]);
   }
 
-  function updateStatus(status){
+  function updateGameStatus(status){
     if ( status.winner || status.draw ) {
       gameStatus = 0;
     } else if ( status.reset ) {
-      $('.cell').removeClass('cell-x cell-o winner');
       gameStatus = 1;
       clearBoard();
     } else {
@@ -61,16 +60,20 @@ $(function(){
   }
 
   function updateDisplay (status) {
+    var display = $('.game-status');
     if ( status.winner ) {
-      $('.win-indicator').addClass('win-' + status.winner.cells);
-      $('.win-indicator').css('visibility', 'visible');
-      $('.game-status').text('Player ' + status.winner.player + ' wins!');
+      displayWinOnBoard(status);
+      display.text('Player ' + status.winner.player + ' wins!');
     } else if ( status.draw ) {
-      $('.game-status').text('This game is a draw');
+      display.text('This game is a draw');
     } else {
-      var player = gameStatus === 1 ? 'Player One' : 'Player Two';
-      $('.game-status').text(player + '\'s Turn');
+      display.text('Player ' + gameStatus + '\'s Turn');
     }
+  }
+
+  function displayWinOnBoard(status) {
+    $('.win-indicator').addClass('win-' + status.winner.cells);
+    $('.win-indicator').css('visibility', 'visible');
   }
 
   function clearBoard(){
@@ -79,4 +82,4 @@ $(function(){
     $('.win-indicator').attr('class', 'win-indicator');
     $('.win-indicator').css('visibility', 'hidden');
   }
-})
+});

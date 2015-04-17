@@ -3,7 +3,7 @@ body {
   margin: 0;
 }
 
-.banner {
+.title-banner {
   height: 40px;
   color: #FFFFFF;
   background-color: rgb(89, 202, 161);
@@ -36,14 +36,7 @@ body {
 
 .player {
   position: relative;
-  display: table;
-  height: 50%;
   font-size: 24px;
-}
-
-.player span {
-  display: table-cell;
-  vertical-align: middle;
 }
 
 .board {
@@ -63,7 +56,6 @@ body {
 .cell-hover-x::after, .cell-hover-o::after, .cell-x::after, .cell-o::after {
   font-family: FontAwesome;
   position: absolute;
-  color: lightgrey;
   font-size: 75px;
   top: 37.5px;
   left: 50%;
@@ -91,24 +83,13 @@ body {
   color: rgb(235, 50, 159);
 }
 
-.winner {
-  background: rgb(89, 202, 161);
-}
-
-.winner-x {
-  border: 1px solid rgb(0, 154, 255);
-}
-
-.winner-o {
-  border: 1px solid rgb(235, 50, 159);
-}
-
 .board div:nth-child(3n+2) {
   border-right: 3px solid #777777;
   border-left: 3px solid #777777;
 }
 
-.board div:nth-child(n+4):nth-child(-n+6) {
+/*Can't chain nth-child selectors in Safari.  Have to use nth-of-type.*/
+.board div:nth-of-type(n+4):nth-of-type(-n+6) {
   border-top: 3px solid #777777;
   border-bottom: 3px solid #777777;
 }
@@ -154,15 +135,15 @@ body {
 
 .win-d1 {
   width: 634.4px;
-  -webkit-transform: rotate(45deg);
-  transform: rotate(45deg); 
+  -webkit-transform: rotate(45deg) translateY(-50%);
+  transform: rotate(45deg) translateY(-50%); 
 }
 
 .win-d2 {
   width: 634.4px;
   left: 450px;
-  -webkit-transform: rotate(135deg);
-  transform: rotate(135deg); 
+  -webkit-transform: rotate(135deg) translateY(-50%);
+  transform: rotate(135deg) translateY(-50%); 
 }
 
 .status-container {
