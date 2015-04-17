@@ -1,22 +1,44 @@
+body {
+  font-family: 'Architects Daughter', cursive;
+  margin: 0;
+}
+
+.banner {
+  height: 40px;
+  color: #FFFFFF;
+  background-color: rgb(89, 202, 161);
+  text-align: center;
+  font-size: 32px;
+}
+
+.player-container {
+  padding-left: 20px;
+  position: relative;
+}
+
+.player-container div:first-child::after, .player-container div:nth-child(2)::after {
+  font-family: FontAwesome;
+  font-size: 24px;
+  position: absolute;
+  top: 4px;
+  left: 125px;
+} 
+
 .player-container div:first-child::after {
   content: '\f00d';
-  font-family: FontAwesome;
-  color: blue;
-  font-size: 24px;
-  margin-left: 5px;
+  color: rgb(0, 154, 255);
 }
 
 .player-container div:nth-child(2)::after {
   content: '\f10c';
-  font-family: FontAwesome;
-  color: red;
-  font-size: 24px;
-  margin-left: 5px;
+  color: rgb(235, 50, 159);
 }
 
 .player {
+  position: relative;
   display: table;
   height: 50%;
+  font-size: 24px;
 }
 
 .player span {
@@ -31,10 +53,50 @@
 }
 
 .cell {
+  position: relative;
   float: left;
   width: 150px;
   height: 150px;
   box-sizing: border-box;
+}
+
+.cell-hover-x::after, .cell-hover-o::after, .cell-x::after, .cell-o::after {
+  font-family: FontAwesome;
+  position: absolute;
+  color: lightgrey;
+  font-size: 75px;
+  top: 37.5px;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+
+.cell-hover-x::after {
+  content: '\f00d';
+  color: lightgrey;
+}
+
+.cell-hover-o::after{
+  content: '\f10c';
+  color: lightgrey;
+}
+
+.cell-x::after {
+  content: '\f00d';
+  color: rgb(0, 154, 255);
+}
+
+.cell-o::after {
+  content: '\f10c';
+  color: rgb(235, 50, 159);
+}
+
+.winner-x {
+  border: 1px solid rgb(0, 154, 255);
+}
+
+.winner-o {
+  border: 1px solid rgb(235, 50, 159);
 }
 
 .board div:nth-child(3n+2) {
@@ -45,4 +107,21 @@
 .board div:nth-child(n+4):nth-child(-n+6) {
   border-top: 3px solid #777777;
   border-bottom: 3px solid #777777;
+}
+
+.status-container {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 24px;
+}
+
+.new-game {
+  color: #FFFFFF;
+  background-color: rgb(89, 202, 161);
+  font-size: 18px;
+  font-family: 'Architects Daughter', cursive;
+  margin-top: 10px;
+  width: 200px;
+  border-radius: 5px;
+  border: none;
 }
