@@ -43,7 +43,7 @@ $(function(){
   function addMarker(cell) {
     var classes = {1: 'cell-x', 2: 'cell-o'};
     var e = $('#' + cell);
-    e.removeClass('open .cell-hover-x::after, .cell-hover-o');
+    e.removeClass('open .cell-hover-x .cell-hover-o');
     e.addClass(classes[gameStatus]);
   }
 
@@ -53,6 +53,7 @@ $(function(){
     } else if ( status.reset ) {
       $('.cell').removeClass('cell-x cell-o winner');
       gameStatus = 1;
+      clearBoard();
     } else {
       gameStatus = gameStatus === 1 ? 2 : 1;
     } 
@@ -61,10 +62,8 @@ $(function(){
 
   function updateDisplay (status) {
     if ( status.winner ) {
-      var winningCells = status.winner.cells.split('');
-      winningCells.forEach(function(cell){
-        $('#' + cell).addClass('winner');
-      })
+      $('.win-indicator').addClass('win-' + status.winner.cells);
+      $('.win-indicator').css('visibility', 'visible');
       $('.game-status').text('Player ' + status.winner.player + ' wins!');
     } else if ( status.draw ) {
       $('.game-status').text('This game is a draw');
@@ -72,5 +71,12 @@ $(function(){
       var player = gameStatus === 1 ? 'Player One' : 'Player Two';
       $('.game-status').text(player + '\'s Turn');
     }
+  }
+
+  function clearBoard(){
+    $('.cell').removeClass('cell-x cell-o');
+    $('.cell').addClass('open');
+    $('.win-indicator').attr('class', 'win-indicator');
+    $('.win-indicator').css('visibility', 'hidden');
   }
 })

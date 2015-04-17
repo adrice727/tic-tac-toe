@@ -113,6 +113,58 @@ body {
   border-bottom: 3px solid #777777;
 }
 
+.win-indicator {
+  position: relative;
+  border-bottom: 5px solid #000000;
+  width: 450px;
+  -webkit-transform-origin: top left;
+  transform-origin: top left;
+  visibility: hidden;
+}
+
+.win-r1 {
+  top: 75px;
+}
+
+.win-r2 {
+  top: 225px;
+}
+
+.win-r3 {
+  top: 375px;
+}
+
+.win-c1 {
+  left: 75px;
+  -webkit-transform: rotate(90deg) translateY(-50%);
+  transform: rotate(90deg) translateY(-50%);
+}
+
+.win-c2 {
+  left: 225px;
+  -webkit-transform: rotate(90deg) translateY(-50%);
+  transform: rotate(90deg) translateY(-50%);
+}
+
+.win-c3 {
+  left: 375px;
+  -webkit-transform: rotate(90deg) translateY(-50%);
+  transform: rotate(90deg) translateY(-50%);
+}
+
+.win-d1 {
+  width: 634.4px;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg); 
+}
+
+.win-d2 {
+  width: 634.4px;
+  left: 450px;
+  -webkit-transform: rotate(135deg);
+  transform: rotate(135deg); 
+}
+
 .status-container {
   text-align: center;
   margin-top: 30px;
