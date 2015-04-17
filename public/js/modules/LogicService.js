@@ -25,10 +25,10 @@ var LogicService = (function(){
     var deferred = $.Deferred();
     $.post(url + '/reset').then(
       function(data){
-        deferred.resolve(data);
+        deferred.resolve(true);
       },
       function(error){
-        deferred.reject(error);
+        deferred.reject(false);
       }
     );
     return deferred.promise();  

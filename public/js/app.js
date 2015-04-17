@@ -1,16 +1,15 @@
 $(function(){
 
   var logic = new LogicService();
-  console.log(logic);
-  // O: game over; 1: player1; 2: player2
-  var gameStatus = 1;
-
+  var gameStatus = 1; // O: game over; 1: player1; 2: player2
+  var pause = false;
 
   // Event Handlers
   $('.cell.open').on('click', function(){
     // var cell = $(this).data('id');
     var cell = $(this).attr('id');
-    move(cell)
+    console.log(cell);
+    if (!pause) { move(cell); }
   })
 
   $('.cell.open').hover(
@@ -25,11 +24,19 @@ $(function(){
     }
   )
 
+  $('.new-game').on('click', function(){
+    logic.reset().then(function(reset){
+      if ( reset ) { updateStatus({reset: reset}); }
+    });
+  })
+
   function move(cell) {
+    pause = !pause;
     logic.move(gameStatus, cell).then(function(data) {
       if ( data.valid ) { 
         addMarker(cell);
         updateStatus(data.winner, data.draw);
+        pause = !pause;
       }
     });
   };
@@ -41,15 +48,17 @@ $(function(){
     e.addClass(classes[gameStatus]);
   }
 
-  function updateStatus(winner, draw){
-    var status = {winner: winner, draw: draw};
+  function updateStatus(status){
     console.log('xoxoxo', status);
     // updateDisplay(status);
-    if ( winner || draw ) {
+    if ( status.winner || status.draw ) {
       gameStatus = 0;
+    } else if ( status.reset ) {
+      $('.cell').removeClass('cell-x cell-o');
+      gameStatus = 1;
     } else {
       gameStatus = gameStatus === 1 ? 2 : 1;
-    }
+    } 
   }
 
 

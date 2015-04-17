@@ -124,4 +124,5 @@ body {
   width: 200px;
   border-radius: 5px;
   border: none;
+  cursor: pointer;
 }
