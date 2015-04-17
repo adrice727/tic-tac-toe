@@ -30,12 +30,13 @@ $(function(){
     });
   })
 
+  // Helper functions
   function move(cell) {
     pause = !pause;
     logic.move(gameStatus, cell).then(function(data) {
       if ( data.valid ) { 
         addMarker(cell);
-        updateStatus(data.winner, data.draw);
+        updateStatus(data);
         pause = !pause;
       }
     });
@@ -49,37 +50,30 @@ $(function(){
   }
 
   function updateStatus(status){
-    console.log('xoxoxo', status);
-    // updateDisplay(status);
     if ( status.winner || status.draw ) {
       gameStatus = 0;
     } else if ( status.reset ) {
-      $('.cell').removeClass('cell-x cell-o');
+      $('.cell').removeClass('cell-x cell-o winner');
       gameStatus = 1;
     } else {
       gameStatus = gameStatus === 1 ? 2 : 1;
     } 
+    updateDisplay(status);
   }
 
-
-  // function updateBoard(cell, winner) {
-  //   var e = $('#' + cell);
-  //   var classes = {1: 'cell-x', 2: 'cell-o'};
-  //   e.removeClass('open');
-  //   e.addClass(classes[gameStatus]);
-  //   updateGameStatus(winner);
-  // }
-
-  // function updateGameStatus(winner) {
-  //   if ( winner ) {
-  //     var winningCells = winner.cells.split('');
-  //     var classes = {1: 'winner-x', 2: 'winner-o'};
-  //     winningCells.forEach(function(cell) {
-  //       $('.cell[data-item-id="' + cell +  '"]').addClass(classes[gameStatus]);
-  //     })
-  //     $('.game_status').text('Player ' + gameStatus + ' wins!');
-  //     $('.status-container').show();
-  //   }
-  // }
-
+  function updateDisplay (status) {
+    console.log(status);
+    if ( status.winner ) {
+      var winningCells = status.winner.cells.split('');
+      winningCells.forEach(function(cell){
+        $('#' + cell).addClass('winner');
+      })
+      $('.game-status').text('Player ' + status.winner.player + ' wins!');
+    } else if ( status.draw ) {
+      $('.game-status').text('This game is a draw');
+    } else {
+      var player = gameStatus === 1 ? 'Player One' : 'Player Two';
+      $('.game-status').text(player + '\'s Turn');
+    }
+  }
 })

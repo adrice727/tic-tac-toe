@@ -6,7 +6,6 @@ var bodyParser = require('body-parser');
 app.use(express.static(__dirname + '/public'));
 app.use('/bower_components',  express.static(__dirname + '/bower_components'));
 app.use(bodyParser.json()); 
-// var jsonParser = bodyParser.json()
 
 app.get('/', function(req, res) {
     res.render('index.html');

@@ -37,22 +37,22 @@ function checkForWinner(){
   return winner;
 
   function horizontalWinner (){
-    if ( !!cells[1] && cells[1] === cells[2] && cells[2] === cells[3] ) { return {cells: '123'};}
-    if ( !!cells[4] && cells[4] === cells[5] && cells[5] === cells[6] ) { return {cells: '456'};}
-    if ( !!cells[7] && cells[7] === cells[8] && cells[8] === cells[9] ) { return {cells: '789'};}
+    if ( !!cells[1] && cells[1] === cells[2] && cells[2] === cells[3] ) { return {player: cells[1], cells: '123'};}
+    if ( !!cells[4] && cells[4] === cells[5] && cells[5] === cells[6] ) { return {player: cells[4], cells: '456'};}
+    if ( !!cells[7] && cells[7] === cells[8] && cells[8] === cells[9] ) { return {player: cells[7], cells: '789'};}
     return false;
   }
 
   function verticalWinner (){
-    if ( !!cells[1] && cells[1] === cells[4] && cells[4] === cells[7] ) { return {cells: '147'};}
-    if ( !!cells[2] && cells[2] === cells[5] && cells[5] === cells[8] ) { return {cells: '258'};}
-    if ( !!cells[3] && cells[3] === cells[6] && cells[6] === cells[9] ) { return {cells: '369'};}
+    if ( !!cells[1] && cells[1] === cells[4] && cells[4] === cells[7] ) { return {player: cells[1], cells: '147'};}
+    if ( !!cells[2] && cells[2] === cells[5] && cells[5] === cells[8] ) { return {player: cells[2], cells: '258'};}
+    if ( !!cells[3] && cells[3] === cells[6] && cells[6] === cells[9] ) { return {player: cells[3], cells: '369'};}
     return false;
   }
 
   function diagonalWinner (){
-    if ( !!cells[1] && cells[1] === cells[5] && cells[5] === cells[9] ) { return {cells: '159'};}
-    if ( !!cells[3] && cells[3] === cells[5] && cells[5] === cells[7] ) { return {cells: '357'};}
+    if ( !!cells[1] && cells[1] === cells[5] && cells[5] === cells[9] ) { return {player: cells[1], cells: '159'};}
+    if ( !!cells[3] && cells[3] === cells[5] && cells[5] === cells[7] ) { return {player: cells[3], cells: '357'};}
     return false;
   }
 }

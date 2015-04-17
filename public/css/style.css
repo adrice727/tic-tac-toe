@@ -91,6 +91,10 @@ body {
   color: rgb(235, 50, 159);
 }
 
+.winner {
+  background: rgb(89, 202, 161);
+}
+
 .winner-x {
   border: 1px solid rgb(0, 154, 255);
 }
